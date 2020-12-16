@@ -8,7 +8,7 @@ class ProductCart extends React.Component {
             edit: false,
             photo: 'https://avatars.mds.yandex.net/get-zen_doc/127081/pub_5b327d53069d2a00a9e51136_5b327e88347c6f00a8db0542/scale_1200',
             description: 'Describe the product',
-            price: 'Indicate the price', 
+            price: null, 
             sale: null,
             daySale: null, 
             discountPrice: null, 
@@ -36,20 +36,35 @@ class ProductCart extends React.Component {
 
     percent() {
         let value = this.refs.percent.value;        
-        let totalValue = this.state.price - (this.state.price / 100 * value)
+        let totalValue = this.state.price - (this.state.price / 100 * value);
 
-        this.setState({sale: value});
-        this.setState({discountPrice: totalValue});
+        (parseInt(value) >= 10 && parseInt(value) <= 90)
+        ? this.setState({discountPrice: totalValue.toFixed(2) + '$'})
+        : this.setState({discountPrice: '-'});
+
+        (parseInt(value) >= 10 && parseInt(value) <= 90)
+        ? this.setState({sale: value + '%'})
+        : this.setState({sale: '-'})
     }
 
     price() {
         let value = this.refs.price.value;
-        this.setState({price: value})
+
+        if (parseInt(value) <= 99999999.99) { 
+        return this.setState({price: value})
+        } else { 
+            return null;
+            }
     }
 
     changeDescription() {
         let value = this.refs.description.value;
-        this.setState({description: value})
+        
+        if (value.length <= 200) { 
+        return this.setState({description: value})
+        } else {
+            return null;
+        }
     }
 
     onEdit() {
@@ -74,7 +89,7 @@ class ProductCart extends React.Component {
                         <img className='img-product' src={this.state.photo}/>
                     </div>
                     <div className='product-description'>
-                        <p className='name'>{this.props.children}</p> 
+                        <p className='product-name'>{this.props.children}</p> 
                         <p className='description'>{this.state.description}</p>
                         <p className='price'>{this.state.price}</p>
 
@@ -101,7 +116,11 @@ class ProductCart extends React.Component {
                     <textarea ref='price' placeholder='Enter price' onChange={this.price}></textarea>
                     <textarea ref='percent' placeholder='Discount percentage' onChange={this.percent}></textarea>
                     <input className='input-date' ref='date' type='date' onChange={this.days}/>
-                    <button className='btn-save' onClick={this.save}>Save</button>
+                    {
+                        this.state.price
+                        ? <button className='btn-save-active' onClick={this.save}>Save</button>
+                        : <button className='btn-save-none-active'>Save</button>
+                    }
                   </div>} 
             </div>
         )

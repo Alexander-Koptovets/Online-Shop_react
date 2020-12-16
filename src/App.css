@@ -128,7 +128,7 @@
     border-radius: 3%;
 }
 
-.name {
+.product-name {
     font-size: 25px;
 }
 
@@ -179,13 +179,31 @@ textarea, .input-date {
     margin: 5px 0;
     height: 30px;
     width: 200px;
+    color: #258203;
+    font-size: 15px;
 }
 
-.btn-save {
+.input-date {
+    color: #258203;
+    font-size: 15px;
+}
+
+.btn-save-active {
     background: #fff;
     color: #045901;
     font-size: 15px;
     border: 1px solid #fff;
+    border-radius: 3%;
+    height: 40px;
+    width: 75px;
+    margin: 5px 0;
+}
+
+.btn-save-none-active {
+    background: #4e4c4f;
+    color: #fff;
+    font-size: 15px;
+    border: 1px solid #4e4c4f;
     border-radius: 3%;
     height: 40px;
     width: 75px;

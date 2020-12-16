@@ -20,8 +20,8 @@ class HomePage extends React.Component {
 
     checkPassword(e) {
         e.target.value.length >= 5  
-        ? this.setState({checkName: true})
-        : this.setState({checkName: false})
+        ? this.setState({checkPassword: true})
+        : this.setState({checkPassword: false})
     }
 
     render() {
@@ -40,7 +40,7 @@ class HomePage extends React.Component {
                         <span className='signe-in-check'>*You must enter at least five any characters</span>
                     </div>
                     <div className='sign-in-link'>
-                    {this.state.checkName 
+                    {this.state.checkName && this.state.checkPassword
                         ? <NavLink className='active-link' to='/Products'>Signe In</NavLink>
                         : <NavLink className='non-active-link' to='/Products'>Signe In</NavLink>
                     }
